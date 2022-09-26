@@ -40,16 +40,34 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ucup Chat Bot'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const CircleAvatar(
+              radius: 18,
+              backgroundImage: AssetImage(
+                'assets/robot-no-bg.png',
+              ),
+              backgroundColor: Colors.white,
+            ),
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              child: const Text(
+                'Ucup Bot',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 15, bottom: 10),
+              padding: const EdgeInsets.only(top: 12, bottom: 10),
               child: Text(
                 "Today, ${DateFormat("Hm").format(DateTime.now())}",
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 12),
               ),
             ),
             Expanded(
