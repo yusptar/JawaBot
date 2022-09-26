@@ -1,5 +1,5 @@
 # UcupBot
 
-Aplikasi yang dikembangkan ini menggunakan package dialogflow flutter yang dipergunakan untuk chat bot, dengan tampilan UI/UX sederhana. 
+Aplikasi chat bot sederhana yang dikembangkan dengan menggunakan package dialog_flowtter.
 
 
