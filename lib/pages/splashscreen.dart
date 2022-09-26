@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 10.0),
+                        padding: EdgeInsets.only(top: 5.0),
                       ),
                       Text(
                         'UcupBot',

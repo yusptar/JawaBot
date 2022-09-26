@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
             Container(
               padding: const EdgeInsets.all(10.0),
               child: const Text(
-                'Ucup Bot',
+                'UcupBot',
                 style: TextStyle(fontSize: 18),
               ),
             ),
@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 12, bottom: 10),
+              padding: const EdgeInsets.only(top: 5, bottom: 5),
               child: Text(
                 "Today, ${DateFormat("Hm").format(DateTime.now())}",
                 style: const TextStyle(fontSize: 12),
@@ -63,8 +63,8 @@ class _HomeState extends State<Home> {
               leading: IconButton(
                 icon: const Icon(
                   Icons.camera_alt,
-                  color: Colors.greenAccent,
-                  size: 35,
+                  color: Colors.white,
+                  size: 33,
                 ),
                 onPressed: () {},
               ),
@@ -101,9 +101,6 @@ class _HomeState extends State<Home> {
                     _controller.clear();
                   }),
             ),
-            const SizedBox(
-              height: 15.0,
-            )
           ],
         ),
       ),
