@@ -4,19 +4,6 @@ import 'package:chat_bot/helper/messages.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ucup Chat Bot',
-      theme: ThemeData(brightness: Brightness.dark),
-      home: const Home(),
-    );
-  }
-}
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -41,7 +28,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const CircleAvatar(
               radius: 18,
