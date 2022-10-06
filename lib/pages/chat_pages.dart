@@ -4,14 +4,14 @@ import 'package:chat_bot/helper/messages.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class ChatPage extends StatefulWidget {
+  const ChatPage({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _HomeState extends State<Home> {
+class _ChatPageState extends State<ChatPage> {
   late DialogFlowtter dialogFlowtter;
   final _controller = TextEditingController();
 
