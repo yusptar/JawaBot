@@ -1,3 +1,4 @@
+import 'package:chat_bot/pages/login_pages.dart';
 import 'package:chat_bot/pages/splashscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'UcupBot',
-      theme: ThemeData(brightness: Brightness.dark),
-      home: const SplashScreen(),
+      title: 'JawaBot',
+      theme: ThemeData(
+          primarySwatch: Colors.blueGrey,
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            color: Colors.white, // This removes the shadow from all App Bars.
+          )),
+      home: const LoginPage(),
     );
   }
 }

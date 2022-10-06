@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
             Container(
               padding: const EdgeInsets.all(10.0),
               child: const Text(
-                'UcupBot',
+                'JawaBot',
                 style: TextStyle(fontSize: 18),
               ),
             ),
@@ -60,14 +60,14 @@ class _HomeState extends State<Home> {
               child: MessagesScreen(messages: messages),
             ),
             ListTile(
-              leading: IconButton(
+              /*leading: IconButton(
                 icon: const Icon(
                   Icons.camera_alt,
                   color: Colors.white,
                   size: 33,
                 ),
                 onPressed: () {},
-              ),
+              ),*/
               title: Container(
                 height: 35,
                 decoration: const BoxDecoration(

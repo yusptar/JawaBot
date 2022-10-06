@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         padding: EdgeInsets.only(top: 5.0),
                       ),
                       Text(
-                        'UcupBot',
+                        'JawaBot',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       padding: EdgeInsets.only(top: 20.0),
                     ),
                     Text(
-                      'Alone? Talk with UcupBot',
+                      'Sinau Sejarah Pulo Jowo',
                       softWrap: true,
                       textAlign: TextAlign.center,
                       style: TextStyle(
