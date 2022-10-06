@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:chat_bot/pages/chat_pages.dart';
+import 'package:chat_bot/pages/login_pages.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return const Home();
+            return const LoginPage();
           },
         ),
       ),
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: [
           Container(
-            decoration: const BoxDecoration(color: Colors.black26),
+            decoration: const BoxDecoration(color: Colors.white),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       Text(
                         'JawaBot',
                         style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 24.0),
                       )
@@ -81,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14.0,
-                          color: Colors.white),
+                          color: Colors.black),
                     )
                   ],
                 ),

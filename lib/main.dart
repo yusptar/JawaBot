@@ -9,15 +9,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'JawaBot',
-      theme: ThemeData(
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: MaterialApp(
+        title: 'JawaBot',
+        theme: ThemeData(
           primarySwatch: Colors.blueGrey,
           appBarTheme: const AppBarTheme(
-            elevation: 0,
-            color: Colors.white, // This removes the shadow from all App Bars.
-          )),
-      home: const LoginPage(),
+            elevation: 0, // This removes the shadow from all App Bars.
+          ),
+          backgroundColor: Colors.transparent,
+        ),
+        home: const SplashScreen(),
+      ),
     );
   }
 }
