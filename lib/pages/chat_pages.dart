@@ -1,6 +1,6 @@
 import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_bot/helper/messages.dart';
+import 'package:chat_bot/services/messages.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
 

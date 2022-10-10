@@ -1,14 +1,32 @@
+import 'package:chat_bot/pages/chat_pages.dart';
+import 'package:chat_bot/pages/help_center_page.dart';
+import 'package:chat_bot/pages/information_page.dart';
+import 'package:chat_bot/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/pages/login_pages.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _DashboardPageState extends State<DashboardPage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  static const List _pages = [
+    InformationPage(),
+    HelpCenterPage(),
+    ProfilePage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +38,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.all(10),
             child: const CircleAvatar(
-              radius: 18,
+              radius: 30,
               backgroundImage: AssetImage(
                 'assets/robot-no-bg.png',
               ),
@@ -30,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawer: Drawer(
-        elevation: 5.0,
+        elevation: 0,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -69,21 +87,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              title: const Text("MAIN MENU"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text("Home"),
-              onTap: () {
-                MaterialPageRoute route =
-                    MaterialPageRoute(builder: (_) => HomePage());
-                Navigator.push(context, route);
-              },
-            ),
-            ListTile(
               leading: const Icon(Icons.logout),
               title: const Text("Log Out"),
               onTap: () {
@@ -100,95 +103,44 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Container(
-        child: ListView(
-          children: [
-            Container(
-              margin: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'Recommended for you',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
+      body: Center(
+        child: _pages.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        elevation: 0,
+        selectedFontSize: 12,
+        selectedIconTheme: const IconThemeData(color: Colors.black, size: 35),
+        selectedItemColor: Colors.black,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help_rounded),
+            label: 'Help Center',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_rounded),
+            label: 'Profile',
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.chat_outlined),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const ChatPage();
+              },
             ),
-            for (int i = 0; i < 5; i++)
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: const Color(0xFFE6E6E6)),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          height: 160,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                topRight: Radius.circular(5)),
-                            image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/images/background$i.jpg'),
-                                fit: BoxFit.cover),
-                          ),
-                        ),
-                        Positioned(
-                          right: 16,
-                          top: 16,
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF7D59EE),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: const Text('9.1'),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 8),
-                      child: Row(
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Iceland - 6D 5N',
-                                style: TextStyle(color: Color(0xFF2A2A2A)),
-                              ),
-                              SizedBox(height: 3),
-                              Text(
-                                'Complete Guided Tour',
-                                style: TextStyle(
-                                    color: Color(0xFFA9A9BA), fontSize: 11.5),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          const Text(
-                            '\$2,250',
-                            style: TextStyle(
-                                color: Color(0xFF2A2A2A),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )
-          ],
-        ),
+          );
+        },
       ),
     );
   }

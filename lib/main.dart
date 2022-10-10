@@ -1,4 +1,3 @@
-import 'package:chat_bot/pages/login_pages.dart';
 import 'package:chat_bot/pages/splashscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
           appBarTheme: const AppBarTheme(
-            elevation: 0, // This removes the shadow from all App Bars.
+            elevation: 0,
           ),
           backgroundColor: Colors.transparent,
         ),
