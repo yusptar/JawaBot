@@ -1,10 +1,6 @@
 # JawaBot
 
-Aplikasi chat bot sederhana yang dikembangkan dengan menggunakan package dialog_flowtter.
+Aplikasi mobile bertopic edukasi sejarah dengan fitur berita sejarah dan chat bot sebagai tanya jawab mengenai sejarah pulau jawa.
 
-### Example Project
-<div>
-  <img src="assets/images/splashscreen.jpeg" width=35%>
-  <img src="assets/images/example.jpeg" width=35%>
-</div>
+
 

@@ -62,26 +62,22 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
               child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Container(
-                    child: const CircleAvatar(
-                      radius: 18,
-                      backgroundImage: AssetImage(
-                        'assets/robot-no-bg.png',
-                      ),
-                      backgroundColor: Colors.white,
+                children: const [
+                  SizedBox(height: 20),
+                  CircleAvatar(
+                    radius: 18,
+                    backgroundImage: AssetImage(
+                      'assets/robot-no-bg.png',
                     ),
+                    backgroundColor: Colors.white,
                   ),
-                  const SizedBox(height: 10),
-                  Container(
-                    child: const Text(
-                      'Hi!',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Hi!',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                 ],
               ),
