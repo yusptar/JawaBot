@@ -1,3 +1,4 @@
+import 'package:chat_bot/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -66,35 +67,35 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   child: Column(
-                    children: const [
-                      SizedBox(
+                    children: [
+                      const SizedBox(
                         height: 80.0,
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 65.0,
                         backgroundImage: AssetImage('assets/default.jpg'),
                         backgroundColor: Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Text(
-                        'Moch Yusuf Hermawan',
-                        style: TextStyle(
+                        email!,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                         ),
                       ),
-                      SizedBox(
+                      /*const SizedBox(
                         height: 10.0,
                       ),
                       Text(
-                        'S Class',
-                        style: TextStyle(
+                        email!,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15.0,
                         ),
-                      )
+                      )*/
                     ],
                   ),
                 ),
@@ -122,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               Divider(
                                 color: Colors.grey[300],
                               ),
-                              Row(
+                              /*Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Icon(
@@ -153,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ],
                                   )
                                 ],
-                              ),
+                              ),*/
                               const SizedBox(
                                 height: 20.0,
                               ),
@@ -179,7 +180,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                       ),
                                       Text(
-                                        "yusupvatar@gmail.com",
+                                        email!,
                                         style: TextStyle(
                                           fontSize: 12.0,
                                           color: Colors.grey[400],

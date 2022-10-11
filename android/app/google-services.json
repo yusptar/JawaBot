@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "115689770895",
+    "project_id": "jawabot-ee266",
+    "storage_bucket": "jawabot-ee266.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115689770895:android:0d27d33a378e26076a85fa",
+        "android_client_info": {
+          "package_name": "com.example.chat_bot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115689770895-ct9ubutim271ffnaemjpksbpjj0gu640.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chat_bot",
+            "certificate_hash": "d73645c549958734634ad5631f14fd882d63c028"
+          }
+        },
+        {
+          "client_id": "115689770895-v3cnted9v8hmnhmu2rvsjd7qqv4cq5l7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb5XDP24Rl5mEvdVhRNjc8F-otoWCjZ1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115689770895-v3cnted9v8hmnhmu2rvsjd7qqv4cq5l7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

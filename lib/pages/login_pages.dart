@@ -1,7 +1,7 @@
 import 'package:chat_bot/pages/dashboard_page.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_bot/pages/dashboard_page.dart';
 import 'package:chat_bot/pages/regis_pages.dart';
+import 'package:chat_bot/services/firebase_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,6 +11,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool passwordHidden = true;
 
   void _showPassword() {
@@ -23,7 +25,6 @@ class _LoginPage extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        // key: formKey,
         child: ListView(
           padding:
               const EdgeInsets.only(left: 24, right: 24, top: 80, bottom: 150),
@@ -40,7 +41,7 @@ class _LoginPage extends State<LoginPage> {
               margin: const EdgeInsets.only(top: 50, bottom: 10),
               child: TextFormField(
                 keyboardType: TextInputType.text,
-                // controller: usernameController,
+                controller: emailController,
                 autofocus: false,
                 decoration: InputDecoration(
                   hintText: 'E-mail',
@@ -55,7 +56,7 @@ class _LoginPage extends State<LoginPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 5),
               child: TextFormField(
-                // controller: passwordController,
+                controller: passwordController,
                 autofocus: false,
                 obscureText: passwordHidden,
                 decoration: InputDecoration(
@@ -112,18 +113,43 @@ class _LoginPage extends State<LoginPage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const DashboardPage();
+                  if (emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty) {
+                    signInWithEmail(
+                            emailController.text, passwordController.text)
+                        .then(
+                      (result) {
+                        if (result != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const DashboardPage();
+                              },
+                            ),
+                          );
+                          const snackBar = SnackBar(
+                            content: Text('Log In Succesfully!'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else {
+                          const snackBar = SnackBar(
+                            content: Text('Wrong Email or Password'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
                       },
-                    ),
-                  );
+                    );
+                  } else {
+                    const snackBar = SnackBar(
+                      content: Text('Oops, something went wrong!'),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
                 },
               ),
             ),
-            Container(
+            /*Container(
               margin: const EdgeInsets.all(10),
               child: TextButton(
                 child: const Text(
@@ -132,7 +158,7 @@ class _LoginPage extends State<LoginPage> {
                 ),
                 onPressed: () {},
               ),
-            ),
+            ),*/
           ],
         ),
       ),

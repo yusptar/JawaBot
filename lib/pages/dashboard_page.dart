@@ -2,6 +2,7 @@ import 'package:chat_bot/pages/chat_pages.dart';
 import 'package:chat_bot/pages/help_center_page.dart';
 import 'package:chat_bot/pages/information_page.dart';
 import 'package:chat_bot/pages/profile_page.dart';
+import 'package:chat_bot/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/pages/login_pages.dart';
 
@@ -86,6 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: const Icon(Icons.logout),
               title: const Text("Log Out"),
               onTap: () {
+                signOut();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

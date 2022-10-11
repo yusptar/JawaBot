@@ -1,5 +1,6 @@
 import 'package:chat_bot/pages/login_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_bot/services/firebase_service.dart';
 
 class RegisPage extends StatefulWidget {
   const RegisPage({Key? key}) : super(key: key);
@@ -9,6 +10,10 @@ class RegisPage extends StatefulWidget {
 }
 
 class _RegisPage extends State<RegisPage> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   bool passwordHidden = true;
   bool isChecked = false;
 
@@ -22,7 +27,6 @@ class _RegisPage extends State<RegisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        // key: formKey,
         child: Center(
           child: ListView(
             padding: const EdgeInsets.only(
@@ -40,7 +44,7 @@ class _RegisPage extends State<RegisPage> {
                 margin: const EdgeInsets.only(top: 50, bottom: 10),
                 child: TextFormField(
                   keyboardType: TextInputType.text,
-                  // controller: nameController,
+                  controller: nameController,
                   autofocus: false,
                   decoration: InputDecoration(
                     hintText: 'Name',
@@ -56,7 +60,7 @@ class _RegisPage extends State<RegisPage> {
                 margin: const EdgeInsets.only(bottom: 10),
                 child: TextFormField(
                   keyboardType: TextInputType.text,
-                  // controller: usernameController,
+                  controller: emailController,
                   autofocus: false,
                   decoration: InputDecoration(
                     hintText: 'E-mail',
@@ -71,7 +75,7 @@ class _RegisPage extends State<RegisPage> {
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
                 child: TextFormField(
-                  // controller: passwordController,
+                  controller: passwordController,
                   autofocus: false,
                   obscureText: passwordHidden,
                   decoration: InputDecoration(
@@ -127,13 +131,20 @@ class _RegisPage extends State<RegisPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const LoginPage();
-                        },
-                      ),
+                    signUpWithEmail(
+                            emailController.text, passwordController.text)
+                        .then(
+                      (result) {
+                        if (result.isNotEmpty) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const LoginPage();
+                              },
+                            ),
+                          );
+                        }
+                      },
                     );
                   },
                 ),
