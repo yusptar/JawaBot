@@ -1,4 +1,7 @@
 import 'package:chat_bot/pages/dashboard_page.dart';
+import 'package:chat_bot/widgets/alert/alert_login.dart';
+import 'package:chat_bot/widgets/alert/alert_login_failure.dart';
+import 'package:chat_bot/widgets/alert/alert_wrong_input.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/pages/regis_pages.dart';
 import 'package:chat_bot/services/firebase_service.dart';
@@ -128,23 +131,14 @@ class _LoginPage extends State<LoginPage> {
                               },
                             ),
                           );
-                          const snackBar = SnackBar(
-                            content: Text('Log In Succesfully!'),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          AlertLoginSucces(context);
                         } else {
-                          const snackBar = SnackBar(
-                            content: Text('Wrong Email or Password'),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          AlertWrongInput(context);
                         }
                       },
                     );
                   } else {
-                    const snackBar = SnackBar(
-                      content: Text('Oops, something went wrong!'),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    AlertLoginFailure(context);
                   }
                 },
               ),

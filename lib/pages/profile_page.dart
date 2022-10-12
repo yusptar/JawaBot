@@ -1,5 +1,6 @@
 import 'package:chat_bot/services/firebase_service.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_bot/widgets/alert/alert_logout.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -123,41 +124,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               Divider(
                                 color: Colors.grey[300],
                               ),
-                              /*Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.person_rounded,
-                                    color: Colors.blueAccent[400],
-                                    size: 35,
-                                  ),
-                                  const SizedBox(
-                                    width: 20.0,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        "Name",
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Moch. Yusuf Hermawan",
-                                        style: TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.grey[400],
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),*/
-                              const SizedBox(
-                                height: 20.0,
-                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -188,6 +154,33 @@ class _ProfilePageState extends State<ProfilePage> {
                                       )
                                     ],
                                   )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20.0,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    Icons.logout,
+                                    color: Colors.black,
+                                    size: 35,
+                                  ),
+                                  const SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  TextButton(
+                                    child: const Text(
+                                      "Log Out",
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      AlertLogOut(context);
+                                    },
+                                  ),
                                 ],
                               ),
                             ],

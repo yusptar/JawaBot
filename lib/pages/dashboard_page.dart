@@ -2,9 +2,8 @@ import 'package:chat_bot/pages/chat_pages.dart';
 import 'package:chat_bot/pages/help_center_page.dart';
 import 'package:chat_bot/pages/information_page.dart';
 import 'package:chat_bot/pages/profile_page.dart';
-import 'package:chat_bot/services/firebase_service.dart';
+import 'package:chat_bot/widgets/alert/alert_logout.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_bot/pages/login_pages.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -87,15 +86,7 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: const Icon(Icons.logout),
               title: const Text("Log Out"),
               onTap: () {
-                signOut();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginPage();
-                    },
-                  ),
-                );
+                AlertLogOut(context);
               },
             ),
           ],

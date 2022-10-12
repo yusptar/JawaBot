@@ -42,6 +42,7 @@ dependencies:
   firebase_auth: ^3.11.2
   provider: ^6.0.4
   firebase_ui_auth: ^1.0.0-dev.0
+  awesome_dialog: ^3.0.2
 
 dev_dependencies:
   flutter_test:

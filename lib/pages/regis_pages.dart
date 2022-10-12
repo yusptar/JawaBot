@@ -1,4 +1,5 @@
 import 'package:chat_bot/pages/login_pages.dart';
+import 'package:chat_bot/widgets/alert/alert_register.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/services/firebase_service.dart';
 
@@ -135,7 +136,7 @@ class _RegisPage extends State<RegisPage> {
                             emailController.text, passwordController.text)
                         .then(
                       (result) {
-                        if (result.isNotEmpty) {
+                        if (result != null) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
@@ -143,22 +144,13 @@ class _RegisPage extends State<RegisPage> {
                               },
                             ),
                           );
+                          AlertRegister(context);
                         }
                       },
                     );
                   },
                 ),
               ),
-              /* Container(
-                margin: const EdgeInsets.all(10),
-                child: TextButton(
-                  child: const Text(
-                    'Forgot Your Password',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onPressed: () {},
-                ),
-              ),*/
             ],
           ),
         ),
