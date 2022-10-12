@@ -143,16 +143,36 @@ class _LoginPage extends State<LoginPage> {
                 },
               ),
             ),
-            /*Container(
+            const SizedBox(
+              height: 80,
+            ),
+            Container(
               margin: const EdgeInsets.all(10),
-              child: TextButton(
-                child: const Text(
-                  'Forgot your password ?',
-                  style: TextStyle(color: Colors.black),
-                ),
-                onPressed: () {},
+              child: const Text(
+                'Or login with',
+                style: TextStyle(color: Colors.black),
+                textAlign: TextAlign.center,
               ),
-            ),*/
+            ),
+            IconButton(
+              onPressed: () {
+                signInWithGoogle().then(
+                  (result) {
+                    if (result != null) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const DashboardPage();
+                          },
+                        ),
+                      );
+                      AlertLoginSucces(context);
+                    }
+                  },
+                );
+              },
+              icon: Image.asset('google_logo.png'),
+            ),
           ],
         ),
       ),

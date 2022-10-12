@@ -72,31 +72,31 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(
                         height: 80.0,
                       ),
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 65.0,
-                        backgroundImage: AssetImage('assets/default.jpg'),
+                        backgroundImage: NetworkImage(image!),
                         backgroundColor: Colors.white,
                       ),
                       const SizedBox(
                         height: 10.0,
                       ),
                       Text(
-                        email!,
+                        name!,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                         ),
                       ),
-                      /*const SizedBox(
+                      const SizedBox(
                         height: 10.0,
                       ),
-                      Text(
-                        email!,
-                        style: const TextStyle(
+                      const Text(
+                        'User JawaBot',
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 15.0,
                         ),
-                      )*/
+                      )
                     ],
                   ),
                 ),
@@ -123,6 +123,41 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               Divider(
                                 color: Colors.grey[300],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.person_rounded,
+                                    color: Colors.blueAccent[400],
+                                    size: 35,
+                                  ),
+                                  const SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Name",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      Text(
+                                        name!,
+                                        style: TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.grey[400],
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20.0,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -156,7 +191,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   )
                                 ],
                               ),
-                              const SizedBox(
+                              /*const SizedBox(
                                 height: 20.0,
                               ),
                               Row(
@@ -182,7 +217,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     },
                                   ),
                                 ],
-                              ),
+                              ),*/
                             ],
                           ),
                         ),

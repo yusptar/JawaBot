@@ -24,7 +24,7 @@ void AlertLogOut(BuildContext context) {
     btnCancelText: 'Tidak',
     btnCancelOnPress: () {},
     btnOkOnPress: () {
-      signOut();
+      signOutGoogle();
       Navigator.push(
         context,
         MaterialPageRoute(

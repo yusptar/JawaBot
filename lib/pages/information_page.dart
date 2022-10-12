@@ -18,7 +18,7 @@ class _InformationPageState extends State<InformationPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text(
-                'Recommended for you',
+                'Informasi Sejarah Pulau Jawa',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
             ],

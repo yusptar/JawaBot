@@ -7,7 +7,7 @@ void AlertLoginFailure(BuildContext context) {
     dialogType: DialogType.error,
     borderSide: const BorderSide(
       color: Colors.white,
-      width: 4,
+      width: 2,
     ),
     width: 380,
     buttonsBorderRadius: const BorderRadius.all(

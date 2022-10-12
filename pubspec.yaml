@@ -43,6 +43,8 @@ dependencies:
   provider: ^6.0.4
   firebase_ui_auth: ^1.0.0-dev.0
   awesome_dialog: ^3.0.2
+  font_awesome_flutter: ^10.2.1
+  google_sign_in: ^5.4.2
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +78,7 @@ flutter:
     - robot-no-bg.png
     - robot.jpg
     - default.jpg
+    - google_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

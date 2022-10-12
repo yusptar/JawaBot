@@ -24,7 +24,7 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
                   const Text(
                     "Help Center",
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
