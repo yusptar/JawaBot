@@ -32,7 +32,7 @@ class _ChatPageState extends State<ChatPage> {
             const CircleAvatar(
               radius: 18,
               backgroundImage: AssetImage(
-                'assets/robot-no-bg.png',
+                'assets/logo/robot-no-bg.png',
               ),
               backgroundColor: Colors.white,
             ),

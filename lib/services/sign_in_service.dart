@@ -20,7 +20,7 @@ Future<String> signInWithGoogle() async {
 
   final UserCredential authResult =
       await _auth.signInWithCredential(credential);
-  final User user = authResult.user!;
+  final User? user = authResult.user;
   if (user != null) {
     // Checking if email and name is null
     assert(user.email != null);
@@ -55,8 +55,9 @@ Future<String> signInWithEmail(String emailInput, String password) async {
     final User currentUser = _auth.currentUser!;
     assert(user.uid == currentUser.uid);
     return '$user';
+  } else {
+    return 'Error';
   }
-  return 'Failed to sign in with Email & Password';
 }
 
 Future<String> signUpWithEmail(String emailregis, String passwordregis) async {

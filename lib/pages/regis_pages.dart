@@ -1,7 +1,8 @@
 import 'package:chat_bot/pages/login_pages.dart';
 import 'package:chat_bot/widgets/alert/alert_register.dart';
+import 'package:chat_bot/widgets/alert/alert_register_failure.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_bot/services/firebase_service.dart';
+import 'package:chat_bot/services/sign_in_service.dart';
 
 class RegisPage extends StatefulWidget {
   const RegisPage({Key? key}) : super(key: key);
@@ -132,22 +133,28 @@ class _RegisPage extends State<RegisPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () {
-                    signUpWithEmail(
-                            emailController.text, passwordController.text)
-                        .then(
-                      (result) {
-                        if (result != null) {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const LoginPage();
-                              },
-                            ),
-                          );
-                          AlertRegister(context);
-                        }
-                      },
-                    );
+                    if (nameController.text.isNotEmpty &&
+                        emailController.text.isNotEmpty &&
+                        passwordController.text.isNotEmpty) {
+                      signUpWithEmail(
+                              emailController.text, passwordController.text)
+                          .then(
+                        (result) {
+                          if (result != null) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const LoginPage();
+                                },
+                              ),
+                            );
+                            AlertRegister(context);
+                          }
+                        },
+                      );
+                    } else {
+                      AlertRegisterFailure(context);
+                    }
                   },
                 ),
               ),

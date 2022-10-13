@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         backgroundColor: Colors.white,
                         radius: 50.0,
                         backgroundImage: AssetImage(
-                          'assets/robot-no-bg.png',
+                          'assets/logo/robot-no-bg.png',
                         ),
                       ),
                       Padding(

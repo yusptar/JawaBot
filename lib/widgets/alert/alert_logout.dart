@@ -1,6 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_bot/services/firebase_service.dart';
+import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:chat_bot/pages/login_pages.dart';
 
 void AlertLogOut(BuildContext context) {

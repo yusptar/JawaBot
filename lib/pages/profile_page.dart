@@ -1,4 +1,4 @@
-import 'package:chat_bot/services/firebase_service.dart';
+import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/widgets/alert/alert_logout.dart';
 
@@ -91,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 10.0,
                       ),
                       const Text(
-                        'User JawaBot',
+                        'User',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15.0,
@@ -108,11 +108,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Center(
                     child: Card(
                       child: Container(
-                        width: 310.0,
-                        height: 170.0,
+                        width: 330.0,
+                        height: 200.0,
                         child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ListView(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10),
+                          child: Column(
                             children: [
                               const Text(
                                 "Information",
@@ -191,8 +192,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   )
                                 ],
                               ),
-                              /*const SizedBox(
-                                height: 20.0,
+                              const SizedBox(
+                                height: 13.0,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -217,7 +218,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     },
                                   ),
                                 ],
-                              ),*/
+                              ),
                             ],
                           ),
                         ),

@@ -4,7 +4,7 @@ import 'package:chat_bot/widgets/alert/alert_login_failure.dart';
 import 'package:chat_bot/widgets/alert/alert_wrong_input.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/pages/regis_pages.dart';
-import 'package:chat_bot/services/firebase_service.dart';
+import 'package:chat_bot/services/sign_in_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -144,15 +144,32 @@ class _LoginPage extends State<LoginPage> {
               ),
             ),
             const SizedBox(
-              height: 80,
+              height: 60,
             ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: const Text(
-                'Or login with',
-                style: TextStyle(color: Colors.black),
-                textAlign: TextAlign.center,
-              ),
+            Row(
+              children: [
+                const Expanded(
+                  child: Divider(
+                    thickness: 0.5,
+                    color: Colors.black,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: const Text(
+                    'Or Log In with',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const Expanded(
+                  child: Divider(
+                    thickness: 0.5,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
             IconButton(
               onPressed: () {
@@ -171,7 +188,7 @@ class _LoginPage extends State<LoginPage> {
                   },
                 );
               },
-              icon: Image.asset('google_logo.png'),
+              icon: Image.asset('assets/logo/google_logo.png'),
             ),
           ],
         ),
