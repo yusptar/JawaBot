@@ -14,34 +14,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            counter = counter + 1;
-          });
-        },
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment(0.8, 1),
-                colors: <Color>[
-                  Color(0xff1f005c),
-                  Color(0xff5b0060),
-                  Color(0xff870160),
-                  Color(0xffac255e),
-                  Color(0xffca485c),
-                  Color(0xffe16b5c),
-                  Color(0xfff39060),
-                  Color(0xffffb56b),
-                ],
-                tileMode: TileMode.mirror,
-              )),
-        ),
-      ),
       body: Stack(
         children: [
           Column(
@@ -70,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 80.0,
+                        height: 110.0,
                       ),
                       CircleAvatar(
                         radius: 65.0,
@@ -108,8 +80,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Center(
                     child: Card(
                       child: Container(
-                        width: 330.0,
-                        height: 200.0,
+                        width: 320.0,
+                        height: 180.0,
                         child: Padding(
                           padding: const EdgeInsets.only(
                               left: 10, right: 10, top: 10),
@@ -192,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   )
                                 ],
                               ),
-                              const SizedBox(
+                              /*const SizedBox(
                                 height: 13.0,
                               ),
                               Row(
@@ -218,7 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     },
                                   ),
                                 ],
-                              ),
+                              ),*/
                             ],
                           ),
                         ),

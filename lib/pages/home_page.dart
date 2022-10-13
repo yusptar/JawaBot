@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chat_bot/widgets/background/paralax_bg.dart';
+import 'package:chat_bot/services/sign_in_service.dart';
+import 'package:chat_bot/widgets/alert/alert_logout.dart';
+import 'package:chat_bot/pages/help_center_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,6 +27,61 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.black.withOpacity(0.1),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
+        actions: [
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(image!),
+            ),
+          )
+        ],
+      ),
+      drawer: Drawer(
+        elevation: 16.0,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                image: DecorationImage(
+                  image: AssetImage('assets/logo/robot-no-bg.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Container(
+                margin: const EdgeInsets.only(top: 100),
+                child: const Text(
+                  "JawaBot",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.help_outline_outlined),
+              title: const Text("Help Center"),
+              onTap: () {
+                MaterialPageRoute route =
+                    MaterialPageRoute(builder: (_) => const HelpCenterPage());
+                Navigator.push(context, route);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text("Log Out"),
+              onTap: () {
+                signOutGoogle();
+                AlertLogOut(context);
+              },
+            ),
+          ],
+        ),
+      ),
       body: NotificationListener(
         onNotification: (notif) {
           if (notif is ScrollUpdateNotification) {

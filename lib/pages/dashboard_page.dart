@@ -1,8 +1,8 @@
 import 'package:chat_bot/pages/chat_pages.dart';
-import 'package:chat_bot/pages/help_center_page.dart';
 import 'package:chat_bot/pages/home_page.dart';
 import 'package:chat_bot/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   static const List _pages = [
     HomeScreen(),
-    HelpCenterPage(),
+    ChatPage(),
     ProfilePage(),
   ];
 
@@ -33,41 +33,29 @@ class _DashboardPageState extends State<DashboardPage> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black.withOpacity(0.2),
+        backgroundColor: Colors.white.withOpacity(0.1),
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         elevation: 0,
-        selectedFontSize: 12,
-        selectedIconTheme: const IconThemeData(color: Colors.white, size: 35),
-        selectedItemColor: Colors.white,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        selectedFontSize: 0.5,
+        selectedIconTheme: const IconThemeData(size: 24, color: Colors.black),
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(FontAwesomeIcons.house),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help_rounded),
-            label: 'Help Center',
+            icon: ImageIcon(
+              AssetImage("assets/logo/robot-no-bg.png"),
+              size: 50,
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded),
-            label: 'Profile',
+            icon: Icon(FontAwesomeIcons.solidCircleUser),
+            label: '',
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.chat_outlined),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const ChatPage();
-              },
-            ),
-          );
-        },
       ),
     );
   }
