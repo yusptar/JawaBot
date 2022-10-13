@@ -1,6 +1,7 @@
 import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/widgets/alert/alert_logout.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -27,14 +28,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       begin: Alignment.topLeft,
                       end: Alignment(0.8, 1),
                       colors: [
-                        Color(0xff1f005c),
-                        Color(0xff5b0060),
-                        Color(0xff870160),
-                        Color(0xffac255e),
-                        Color(0xffca485c),
-                        Color(0xffe16b5c),
-                        Color(0xfff39060),
-                        Color(0xffffb56b),
+                        Colors.black87,
+                        Colors.white,
                       ],
                       tileMode: TileMode.mirror,
                     ),
@@ -55,7 +50,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         name!,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                         ),
                       ),
@@ -65,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       const Text(
                         'User',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 15.0,
                         ),
                       )
@@ -80,8 +76,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Center(
                     child: Card(
                       child: Container(
-                        width: 320.0,
-                        height: 180.0,
+                        width: 330.0,
+                        height: 220.0,
                         child: Padding(
                           padding: const EdgeInsets.only(
                               left: 10, right: 10, top: 10),
@@ -100,10 +96,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(
-                                    Icons.person_rounded,
-                                    color: Colors.blueAccent[400],
-                                    size: 35,
+                                  const Icon(
+                                    FontAwesomeIcons.circleUser,
+                                    color: Colors.black,
+                                    size: 30,
                                   ),
                                   const SizedBox(
                                     width: 20.0,
@@ -135,10 +131,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(
-                                    Icons.email_rounded,
-                                    color: Colors.redAccent[400],
-                                    size: 35,
+                                  const Icon(
+                                    Icons.email_outlined,
+                                    color: Colors.black,
+                                    size: 30,
                                   ),
                                   const SizedBox(
                                     width: 20.0,
@@ -164,25 +160,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                   )
                                 ],
                               ),
-                              /*const SizedBox(
+                              const SizedBox(
                                 height: 13.0,
                               ),
+                              const Divider(),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Icon(
                                     Icons.logout,
                                     color: Colors.black,
-                                    size: 35,
-                                  ),
-                                  const SizedBox(
-                                    width: 20.0,
+                                    size: 30,
                                   ),
                                   TextButton(
                                     child: const Text(
                                       "Log Out",
                                       style: TextStyle(
                                         fontSize: 15.0,
+                                        color: Colors.black,
                                       ),
                                     ),
                                     onPressed: () {
@@ -190,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     },
                                   ),
                                 ],
-                              ),*/
+                              ),
                             ],
                           ),
                         ),

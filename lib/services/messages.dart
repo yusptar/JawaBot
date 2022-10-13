@@ -22,31 +22,32 @@ class _MessagesScreenState extends State<MessagesScreen> {
                   : MainAxisAlignment.start,
               children: [
                 Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 14, horizontal: 14),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: const Radius.circular(
-                            20,
-                          ),
-                          topRight: const Radius.circular(20),
-                          bottomRight: Radius.circular(
-                              widget.messages[index]['isUserMessage'] ? 0 : 20),
-                          topLeft: Radius.circular(
-                              widget.messages[index]['isUserMessage'] ? 20 : 0),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: const Radius.circular(
+                          20,
                         ),
-                        color: widget.messages[index]['isUserMessage']
-                            ? Colors.blueGrey.withOpacity(0.8)
-                            : Colors.blueGrey.withOpacity(0.8)),
-                    constraints: BoxConstraints(maxWidth: w * 2 / 3),
-                    child:
-                        Text(widget.messages[index]['message'].text.text[0])),
+                        topRight: const Radius.circular(20),
+                        bottomRight: Radius.circular(
+                            widget.messages[index]['isUserMessage'] ? 0 : 20),
+                        topLeft: Radius.circular(
+                            widget.messages[index]['isUserMessage'] ? 20 : 0),
+                      ),
+                      color: widget.messages[index]['isUserMessage']
+                          ? Colors.grey[300]
+                          : Colors.grey[300]),
+                  constraints: BoxConstraints(maxWidth: w * 2 / 3),
+                  child: Text(widget.messages[index]['message'].text.text[0]),
+                ),
               ],
             ),
           );
         },
-        separatorBuilder: (_, i) =>
-            const Padding(padding: EdgeInsets.only(top: 10)),
+        separatorBuilder: (_, i) => const Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
         itemCount: widget.messages.length);
   }
 }

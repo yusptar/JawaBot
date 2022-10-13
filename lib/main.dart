@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'JawaBot',
         theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
           appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
             elevation: 0,
           ),
           backgroundColor: Colors.transparent,

@@ -27,14 +27,19 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 3,
         title: Row(
           children: [
-            const CircleAvatar(
-              radius: 18,
-              backgroundImage: AssetImage(
-                'assets/logo/robot-no-bg.png',
+            Container(
+              margin: const EdgeInsets.only(left: 40),
+              child: const CircleAvatar(
+                radius: 18,
+                backgroundImage: AssetImage(
+                  'assets/logo/robot-no-bg.png',
+                ),
+                backgroundColor: Colors.white,
               ),
-              backgroundColor: Colors.white,
             ),
             Container(
               padding: const EdgeInsets.all(10.0),
@@ -50,7 +55,7 @@ class _ChatPageState extends State<ChatPage> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 5, bottom: 5),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
                 "Today, ${DateFormat("Hm").format(DateTime.now())}",
                 style: const TextStyle(fontSize: 12),
@@ -60,18 +65,12 @@ class _ChatPageState extends State<ChatPage> {
               child: MessagesScreen(messages: messages),
             ),
             ListTile(
-              /*leading: IconButton(
-                icon: const Icon(
-                  Icons.camera_alt,
-                  color: Colors.white,
-                  size: 33,
-                ),
-                onPressed: () {},
-              ),*/
               title: Container(
                 height: 35,
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
+                  ),
                   color: Color.fromRGBO(220, 220, 220, 1),
                 ),
                 padding: const EdgeInsets.only(left: 15),
@@ -91,15 +90,16 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ),
               trailing: IconButton(
-                  icon: const Icon(
-                    Icons.send,
-                    size: 30.0,
-                    color: Colors.greenAccent,
-                  ),
-                  onPressed: () {
-                    sendMessage(_controller.text);
-                    _controller.clear();
-                  }),
+                icon: const Icon(
+                  Icons.send,
+                  size: 30.0,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  sendMessage(_controller.text);
+                  _controller.clear();
+                },
+              ),
             ),
           ],
         ),

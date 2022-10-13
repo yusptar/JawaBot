@@ -57,7 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 margin: const EdgeInsets.only(top: 100),
                 child: const Text(
-                  "JawaBot",
+                  "Hi !",
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -87,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (notif is ScrollUpdateNotification) {
             if (notif.scrollDelta == null) return true;
             setState(() {
-              topEleven -= notif.scrollDelta! / 500;
+              topEleven -= notif.scrollDelta! / 2.0;
               topTen -= notif.scrollDelta! / 1.9;
               topNine -= notif.scrollDelta! / 1.8;
               topEight -= notif.scrollDelta! / 1.7;
@@ -158,12 +159,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: MediaQuery.of(context).size.width,
                     color: const Color(0xff372d3b),
                     alignment: Alignment.center,
-                    child: Text(
-                      "Introduction",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(color: Colors.white),
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(top: 300, bottom: 20),
+                          child: const CircleAvatar(
+                            radius: 40,
+                            backgroundImage:
+                                AssetImage("assets/logo/robot-bg.png"),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 5),
+                          child: Text(
+                            "Introduction",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 20, right: 20, left: 20),
+                          child: Text(
+                            "JawaBot merupakan aplikasi edukasi sejarah yang berfokus pada sejarah pulau jawa, dengan fitur unik berupa chatbot yang digunakan untuk tanya jawab seputar sejarah pulau jawa.",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
