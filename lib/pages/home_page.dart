@@ -3,6 +3,7 @@ import 'package:chat_bot/widgets/background/paralax_bg.dart';
 import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:chat_bot/widgets/alert/alert_logout.dart';
 import 'package:chat_bot/pages/help_center_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black.withOpacity(0.1),
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           Container(
             margin: const EdgeInsets.all(10),
@@ -153,7 +154,9 @@ class _HomeScreenState extends State<HomeScreen> {
               physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  const SizedBox(height: 480),
+                  const SizedBox(
+                    height: 480,
+                  ),
                   Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -188,6 +191,64 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .textTheme
                                 .bodyText1
                                 ?.copyWith(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    color: const Color(0xff372d3b),
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 330,
+                          margin: const EdgeInsets.only(top: 150, bottom: 20),
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image:
+                                  AssetImage("assets/images/jawa-island.png"),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 5),
+                          child: Text(
+                            "History of Java Island",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 20, right: 20, left: 20),
+                          child: Text(
+                            "Jawa adalah sebuah pulau di Indonesia yang terletak di kepulauan Sunda Besar dan merupakan pulau terluas ke-13 di dunia. Jumlah penduduk di Pulau Jawa sekitar 150 juta. "
+                            "Jawa adalah pulau yang relatif muda dan sebagian besar terbentuk dari aktivitas vulkanik. Deretan gunung-gunung berapi membentuk jajaran yang terbentang dari timur hingga barat pulau ini, dengan dataran endapan aluvial sungai di bagian utara. Pulau Jawa dipisahkan oleh selat dengan beberapa pulau utama, yakni Pulau Sumatra di barat laut, Pulau Kalimantan di utara, Pulau Madura di timur laut, dan Pulau Bali di sebelah timur. Sementara itu di sebelah selatan pulau Jawa terbentang Samudra Hindia.",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 20, right: 20, left: 20),
+                          child: InkWell(
+                            child: Text(
+                              "Sumber : id.wikipedia.org/wiki/jawa",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                            onTap: () {},
                           ),
                         ),
                       ],

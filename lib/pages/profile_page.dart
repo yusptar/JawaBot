@@ -25,10 +25,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment(0.8, 1),
+                      begin: Alignment.topCenter,
+                      end: Alignment(0.5, 1),
                       colors: [
-                        Colors.black87,
+                        Color.fromARGB(255, 253, 0, 0),
+                        Color.fromARGB(255, 255, 17, 0),
+                        Colors.white,
+                        Colors.white,
                         Colors.white,
                       ],
                       tileMode: TileMode.mirror,
@@ -76,20 +79,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Center(
                     child: Card(
                       child: Container(
-                        width: 330.0,
-                        height: 220.0,
+                        width: 310.0,
+                        height: 250.0,
                         child: Padding(
                           padding: const EdgeInsets.only(
                               left: 10, right: 10, top: 10),
                           child: Column(
                             children: [
-                              const Text(
-                                "Information",
-                                style: TextStyle(
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
                               Divider(
                                 color: Colors.grey[300],
                               ),
@@ -164,6 +160,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 height: 13.0,
                               ),
                               const Divider(),
+                              const SizedBox(
+                                height: 20.0,
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
