@@ -3,6 +3,7 @@ import 'package:chat_bot/widgets/background/paralax_bg.dart';
 import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:chat_bot/widgets/alert/alert_logout.dart';
 import 'package:chat_bot/pages/help_center_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.black.withOpacity(0.1),
+        backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         actions: [
@@ -46,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           canvasColor: Colors.transparent,
         ),
         child: Drawer(
+          elevation: 1,
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
@@ -86,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const Divider(
                 color: Colors.white,
+                thickness: 1,
               ),
               Container(
                 margin: const EdgeInsets.only(left: 15, top: 15, bottom: 2),
@@ -94,6 +97,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+              /*ListTile(
+                leading: const Icon(
+                  FontAwesomeIcons.info,
+                  color: Colors.white,
+                ),
+                title: const Text(
+                  "Information",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {
+                  MaterialPageRoute route =
+                      MaterialPageRoute(builder: (_) => const HelpCenterPage());
+                  Navigator.push(context, route);
+                },
+              ),*/
               ListTile(
                 leading: const Icon(
                   Icons.help_outline_outlined,
@@ -115,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                 ),
                 title: const Text(
-                  "Log Out",
+                  "Sign Out",
                   style: TextStyle(color: Colors.white),
                 ),
                 onTap: () {

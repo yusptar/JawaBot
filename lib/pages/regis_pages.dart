@@ -87,8 +87,14 @@ class _RegisPage extends State<RegisPage> {
                         _showPassword();
                       },
                       child: (passwordHidden)
-                          ? const Text('Show')
-                          : const Text('Hide'),
+                          ? const Text(
+                              'Show',
+                              style: TextStyle(color: Colors.black),
+                            )
+                          : const Text(
+                              'Hide',
+                              style: TextStyle(color: Colors.black),
+                            ),
                     ),
                     contentPadding:
                         const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),

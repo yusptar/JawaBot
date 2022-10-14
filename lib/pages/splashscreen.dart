@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds: 3),
+      const Duration(seconds: 4),
       () => Navigator.push(
         context,
         MaterialPageRoute(
@@ -70,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    // CircularProgressIndicator(),
+                    CircularProgressIndicator(),
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),

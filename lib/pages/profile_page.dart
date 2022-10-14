@@ -15,6 +15,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xff372d3b),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+      ),
       body: Stack(
         children: [
           Column(
@@ -39,14 +44,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 120.0,
+                        height: 65.0,
                       ),
                       CircleAvatar(
                         radius: 65.0,
                         backgroundImage: NetworkImage(image!),
                       ),
                       const SizedBox(
-                        height: 10.0,
+                        height: 15.0,
                       ),
                       Text(
                         name!,
@@ -57,16 +62,30 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 10.0,
+                        height: 20.0,
                       ),
-                      const Text(
-                        ' User ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
+                      ElevatedButton(
+                        // ignore: sort_child_properties_last
+                        child: const Text(
+                          "Sign Out",
+                          style: TextStyle(fontSize: 12),
                         ),
-                      )
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.black),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              side: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        onPressed: () => AlertLogOut(context),
+                      ),
                     ],
                   ),
                 ),
@@ -78,15 +97,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Center(
                     child: Card(
                       child: Container(
-                        margin:
-                            const EdgeInsets.only(left: 10, right: 10, top: 15),
+                        margin: const EdgeInsets.all(10),
                         width: 310.0,
-                        height: 200.0,
-                        child: Column(
+                        height: 100.0,
+                        child: ListView(
                           children: [
-                            Divider(
-                              color: Colors.grey[300],
-                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -150,35 +165,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     )
                                   ],
                                 )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 13.0,
-                            ),
-                            const Divider(),
-                            const SizedBox(
-                              height: 5.0,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.logout,
-                                  color: Colors.black,
-                                  size: 30,
-                                ),
-                                TextButton(
-                                  child: const Text(
-                                    "Log Out",
-                                    style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    AlertLogOut(context);
-                                  },
-                                ),
                               ],
                             ),
                           ],

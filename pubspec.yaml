@@ -46,6 +46,7 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   google_sign_in: ^5.4.2
   url_launcher: ^6.1.6
+  lottie: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -75,7 +76,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - dialog_flow_auth.json
+    - assets/
     - assets/images/
     - assets/logo/
     - assets/background/
