@@ -24,28 +24,29 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment(0.5, 1),
-                      colors: [
-                        Color.fromARGB(255, 253, 0, 0),
-                        Color.fromARGB(255, 255, 17, 0),
-                        Colors.white,
-                        Colors.white,
-                        Colors.white,
-                      ],
-                      tileMode: TileMode.mirror,
+                    image: DecorationImage(
+                      image: AssetImage("assets/background/hi-circle.png"),
+                      fit: BoxFit.cover,
                     ),
+                    /*gradient: LinearGradient(
+                      begin: Alignment(0.0, -1.0),
+                      end: Alignment(0.0, 0.6),
+                      colors: <Color>[
+                        Color.fromARGB(255, 255, 4, 0),
+                        Color.fromARGB(255, 255, 4, 0),
+                        Color.fromARGB(255, 255, 255, 255),
+                        Color.fromARGB(255, 255, 255, 255),
+                      ],
+                    ),*/
                   ),
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 110.0,
+                        height: 150.0,
                       ),
                       CircleAvatar(
                         radius: 65.0,
                         backgroundImage: NetworkImage(image!),
-                        backgroundColor: Colors.white,
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -62,9 +63,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 10.0,
                       ),
                       const Text(
-                        'User',
+                        '( User )',
                         style: TextStyle(
                           color: Colors.black,
+                          fontWeight: FontWeight.bold,
                           fontSize: 15.0,
                         ),
                       )
@@ -73,14 +75,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Expanded(
-                flex: 5,
+                flex: 3,
                 child: Container(
                   color: Colors.grey[200],
                   child: Center(
                     child: Card(
                       child: Container(
                         width: 310.0,
-                        height: 250.0,
+                        height: 200.0,
                         child: Padding(
                           padding: const EdgeInsets.only(
                               left: 10, right: 10, top: 10),
@@ -161,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               const Divider(),
                               const SizedBox(
-                                height: 20.0,
+                                height: 5.0,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,

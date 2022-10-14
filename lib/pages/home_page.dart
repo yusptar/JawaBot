@@ -108,15 +108,15 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ParalaxBackground(
               top: topEleven,
-              asset: "assets/background/top-paralax-11.png",
+              asset: "assets/background/sky-bird.png",
             ),
             ParalaxBackground(
               top: topTen,
-              asset: "assets/logo/jawa-bot.png",
+              asset: "assets/logo/circle-jawa-bot.png",
             ),
             ParalaxBackground(
               top: topNine,
-              asset: "assets/background/top-paralax-9.png",
+              asset: "assets/background/borobudur-temple.png",
             ),
             ParalaxBackground(
               top: topEight,

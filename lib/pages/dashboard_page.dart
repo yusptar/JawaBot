@@ -33,12 +33,14 @@ class _DashboardPageState extends State<DashboardPage> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white.withOpacity(0.1),
+        backgroundColor: const Color(0xff372d3b),
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         elevation: 0,
         selectedFontSize: 0.5,
-        selectedIconTheme: const IconThemeData(size: 24, color: Colors.black),
+        unselectedIconTheme:
+            const IconThemeData(size: 24, color: Colors.white70),
+        selectedIconTheme: const IconThemeData(size: 24, color: Colors.white),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.house),

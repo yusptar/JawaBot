@@ -1,6 +1,7 @@
 import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/services/messages.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
 
@@ -51,7 +52,15 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
       ),
-      body: Center(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/logo/robot-bg.png"),
+          ),
+          color: Colors.white70,
+        ),
         child: Column(
           children: [
             Container(
@@ -77,7 +86,7 @@ class _ChatPageState extends State<ChatPage> {
                 child: TextFormField(
                   controller: _controller,
                   decoration: const InputDecoration(
-                    hintText: "Enter a Message...",
+                    hintText: "Tulis pesan...",
                     hintStyle: TextStyle(color: Colors.black26),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
@@ -91,7 +100,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
               trailing: IconButton(
                 icon: const Icon(
-                  Icons.send,
+                  Icons.send_rounded,
                   size: 30.0,
                   color: Colors.black,
                 ),
