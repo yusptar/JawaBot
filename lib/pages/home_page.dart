@@ -3,7 +3,6 @@ import 'package:chat_bot/widgets/background/paralax_bg.dart';
 import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:chat_bot/widgets/alert/alert_logout.dart';
 import 'package:chat_bot/pages/help_center_page.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,46 +41,90 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      drawer: Drawer(
-        elevation: 16.0,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: const BoxDecoration(
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.transparent,
+        ),
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: NetworkImage(image!),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 15),
+                      child: const Text(
+                        "Selamat Datang!",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 10,
+                            color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 5),
+                      child: Text(
+                        name!,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 16,
+                            color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
                 color: Colors.white,
-                image: DecorationImage(
-                  image: AssetImage('assets/logo/robot-no-bg.png'),
-                  fit: BoxFit.cover,
-                ),
               ),
-              child: Container(
-                margin: const EdgeInsets.only(top: 100),
+              Container(
+                margin: const EdgeInsets.only(left: 15, top: 15, bottom: 2),
                 child: const Text(
-                  "Hi !",
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
-                  textAlign: TextAlign.center,
+                  "Others",
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.help_outline_outlined),
-              title: const Text("Help Center"),
-              onTap: () {
-                MaterialPageRoute route =
-                    MaterialPageRoute(builder: (_) => const HelpCenterPage());
-                Navigator.push(context, route);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text("Log Out"),
-              onTap: () {
-                signOutGoogle();
-                AlertLogOut(context);
-              },
-            ),
-          ],
+              ListTile(
+                leading: const Icon(
+                  Icons.help_outline_outlined,
+                  color: Colors.white,
+                ),
+                title: const Text(
+                  "Help Center",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {
+                  MaterialPageRoute route =
+                      MaterialPageRoute(builder: (_) => const HelpCenterPage());
+                  Navigator.push(context, route);
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ),
+                title: const Text(
+                  "Log Out",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {
+                  signOutGoogle();
+                  AlertLogOut(context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
       body: NotificationListener(
@@ -175,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 5),
                           child: Text(
-                            "Introduction",
+                            "Introduction JawaBot",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall

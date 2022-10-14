@@ -27,31 +27,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 3,
-        title: Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 40),
-              child: const CircleAvatar(
-                radius: 18,
-                backgroundImage: AssetImage(
-                  'assets/logo/robot-no-bg.png',
-                ),
-                backgroundColor: Colors.white,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10.0),
-              child: const Text(
-                'JawaBot',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-          ],
-        ),
-      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -64,10 +39,13 @@ class _ChatPageState extends State<ChatPage> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              padding: const EdgeInsets.only(top: 50, bottom: 20),
               child: Text(
                 "Today, ${DateFormat("Hm").format(DateTime.now())}",
-                style: const TextStyle(fontSize: 12),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
             Expanded(
