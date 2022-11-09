@@ -16,7 +16,7 @@ void AlertRegisterFailure(BuildContext context) {
     headerAnimationLoop: false,
     animType: AnimType.bottomSlide,
     title: 'Register Gagal',
-    desc: 'Nama, email dan password harus terisi.',
+    desc: 'Nama, dan password harus terisi.',
     autoHide: const Duration(seconds: 3),
   ).show();
 }

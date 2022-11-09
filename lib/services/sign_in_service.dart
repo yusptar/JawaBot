@@ -39,47 +39,43 @@ Future<String> signInWithGoogle() async {
   return 'Failure';
 }
 
-Future<String> signInWithEmail(String emailInput, String password) async {
-  await Firebase.initializeApp();
-
-  UserCredential userCredential = await FirebaseAuth.instance
-      .signInWithEmailAndPassword(email: emailInput, password: password);
-
-  final User? user = userCredential.user;
-
-  if (user != null) {
-    assert(user.email != null);
-    email = user.email;
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
-    final User currentUser = _auth.currentUser!;
-    assert(user.uid == currentUser.uid);
-    return '$user';
-  } else {
-    return 'Error';
+Future signInWithEmail(email, password) async {
+  try {
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
+    return 'success';
+  } catch (e) {
+    return e;
   }
 }
 
-Future<String> signUpWithEmail(String emailregis, String passwordregis) async {
+Future<String> signUpWithEmail(String email, String password) async {
   await Firebase.initializeApp();
-  UserCredential userCredential = (await _auth.createUserWithEmailAndPassword(
-      email: emailregis, password: passwordregis));
-
-  final User? user = userCredential.user;
-  if (user != null) {
-    assert(user.email != null);
-    email = user.email;
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
-    final User currentUser = _auth.currentUser!;
-    assert(user.uid == currentUser.uid);
-    return '$user';
+  try {
+    UserCredential result = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+    return result.user!.uid;
+  } catch (e) {
+    return 'failed';
   }
-  return 'Failed to Register';
 }
 
-Future<void> signOut() async {
-  await _auth.signOut();
+Future<String> signOut() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    return 'success';
+  } catch (e) {
+    return 'failed';
+  }
+}
+
+Future resetPassword(email) async {
+  try {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    return 'success';
+  } catch (e) {
+    return e;
+  }
 }
 
 Future<void> signOutGoogle() async {

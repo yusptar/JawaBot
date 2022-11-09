@@ -20,19 +20,16 @@ void AlertLogOut(BuildContext context) {
     title: 'Info',
     desc: 'Apakah anda yakin untuk logout?',
     showCloseIcon: true,
-    btnOkText: 'Ya',
-    btnCancelText: 'Tidak',
+    btnOkColor: Colors.black,
+    btnCancelColor: Colors.black,
+    btnCancelIcon: Icons.close,
+    btnOkText: ' ',
+    btnCancelText: ' ',
+    btnOkIcon: Icons.check,
     btnCancelOnPress: () {},
     btnOkOnPress: () {
+      signOut();
       signOutGoogle();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return const LoginPage();
-          },
-        ),
-      );
     },
   ).show();
 }

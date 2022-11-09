@@ -1,19 +1,27 @@
+import 'package:chat_bot/main.dart';
 import 'package:chat_bot/pages/dashboard_page.dart';
 import 'package:chat_bot/widgets/alert/alert_login.dart';
 import 'package:chat_bot/widgets/alert/alert_login_failure.dart';
-import 'package:chat_bot/widgets/alert/alert_wrong_input.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_bot/pages/regis_pages.dart';
 import 'package:chat_bot/services/sign_in_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final VoidCallback onClickedSignUp;
+
+  const LoginPage({
+    Key? key,
+    required this.onClickedSignUp,
+  }) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPage();
 }
 
 class _LoginPage extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool passwordHidden = true;
@@ -24,10 +32,31 @@ class _LoginPage extends State<LoginPage> {
     });
   }
 
+  Future signIn() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      return e;
+    }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
+        key: formKey,
         child: ListView(
           padding:
               const EdgeInsets.only(left: 24, right: 24, top: 80, bottom: 150),
@@ -46,6 +75,11 @@ class _LoginPage extends State<LoginPage> {
                 keyboardType: TextInputType.text,
                 controller: emailController,
                 autofocus: false,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (email) =>
+                    email != null && !EmailValidator.validate(email)
+                        ? 'Enter a valid email'
+                        : null,
                 decoration: InputDecoration(
                   hintText: 'E-mail',
                   contentPadding:
@@ -62,6 +96,10 @@ class _LoginPage extends State<LoginPage> {
                 controller: passwordController,
                 autofocus: false,
                 obscureText: passwordHidden,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (password) => password != null && password.length < 6
+                    ? 'Enter min. 6 characters'
+                    : null,
                 decoration: InputDecoration(
                   hintText: 'Password',
                   suffixIcon: TextButton(
@@ -86,22 +124,25 @@ class _LoginPage extends State<LoginPage> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(5),
-              child: TextButton(
-                child: const Text(
-                  'Create an account',
-                  style: TextStyle(color: Colors.black),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const RegisPage();
-                      },
+              margin: const EdgeInsets.all(20),
+              alignment: Alignment.center,
+              child: RichText(
+                text: TextSpan(
+                  text: 'Belum mempunyai akun? ',
+                  style: const TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                  children: [
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = widget.onClickedSignUp,
+                      text: 'Daftar',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                     ),
-                  );
-                },
+                  ],
+                ),
               ),
             ),
             const SizedBox(
@@ -124,25 +165,7 @@ class _LoginPage extends State<LoginPage> {
                 onTap: () {
                   if (emailController.text.isNotEmpty &&
                       passwordController.text.isNotEmpty) {
-                    signInWithEmail(
-                            emailController.text, passwordController.text)
-                        .then(
-                      (result) {
-                        if (result != null) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const DashboardPage();
-                              },
-                            ),
-                          );
-                          AlertLoginSucces(context);
-                        } else {
-                          AlertWrongInput(context);
-                        }
-                      },
-                    );
+                    signIn();
                   } else {
                     AlertLoginFailure(context);
                   }

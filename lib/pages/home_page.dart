@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:chat_bot/widgets/background/paralax_bg.dart';
-import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:chat_bot/widgets/alert/alert_logout.dart';
 import 'package:chat_bot/pages/help_center_page.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final user = FirebaseAuth.instance.currentUser!;
+
   double topEleven = 0;
   double topTen = 0;
   double topNine = 0;
@@ -36,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Container(
             margin: const EdgeInsets.all(10),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(image!),
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("assets/images/default.png"),
             ),
           )
         ],
@@ -56,9 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(top: 20),
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(image!),
+                        backgroundImage:
+                            AssetImage("assets/images/default.png"),
                       ),
                     ),
                     Container(
@@ -75,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       margin: const EdgeInsets.only(top: 5),
                       child: Text(
-                        name!,
+                        user.email!,
                         style: const TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 16,
@@ -137,7 +139,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onTap: () {
-                  signOutGoogle();
                   AlertLogOut(context);
                 },
               ),

@@ -1,6 +1,6 @@
-import 'package:chat_bot/services/sign_in_service.dart';
+import 'package:chat_bot/pages/edit_profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_bot/widgets/alert/alert_logout.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -11,7 +11,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int counter = 0;
+  final user = FirebaseAuth.instance.currentUser!;
+  String? photoURL;
+  String? displayName;
+  String? email;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,36 +29,34 @@ class _ProfilePageState extends State<ProfilePage> {
           Column(
             children: [
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
-
-                      /*gradient: LinearGradient(
-                      begin: Alignment(0.0, -1.0),
-                      end: Alignment(0.0, 0.6),
-                      colors: <Color>[
-                        Color.fromARGB(255, 255, 4, 0),
-                        Color.fromARGB(255, 255, 4, 0),
-                        Color.fromARGB(255, 255, 255, 255),
-                        Color.fromARGB(255, 255, 255, 255),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.white,
+                        Color.fromARGB(244, 37, 167, 228),
                       ],
-                    ),*/
-                      ),
+                    ),
+                  ),
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 65.0,
+                        height: 50.0,
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 65.0,
-                        backgroundImage: NetworkImage(image!),
+                        backgroundImage:
+                            AssetImage("assets/images/default.png"),
                       ),
                       const SizedBox(
                         height: 15.0,
                       ),
                       Text(
-                        name!,
+                        user.email!,
                         style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -67,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ElevatedButton(
                         // ignore: sort_child_properties_last
                         child: const Text(
-                          "Sign Out",
+                          "Edit Profile",
                           style: TextStyle(fontSize: 12),
                         ),
                         style: ButtonStyle(
@@ -84,14 +86,23 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        onPressed: () => AlertLogOut(context),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const EditProfilePage();
+                              },
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Container(
                   color: Colors.grey[200],
                   child: Center(
@@ -99,14 +110,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Container(
                         margin: const EdgeInsets.all(10),
                         width: 310.0,
-                        height: 100.0,
+                        height: 200.0,
                         child: ListView(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const Icon(
-                                  FontAwesomeIcons.circleUser,
+                                  FontAwesomeIcons.solidCircleUser,
                                   color: Colors.black,
                                   size: 30,
                                 ),
@@ -123,7 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                     ),
                                     Text(
-                                      name!,
+                                      'Not Set',
                                       style: TextStyle(
                                         fontSize: 12.0,
                                         color: Colors.grey[400],
@@ -140,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const Icon(
-                                  Icons.email_outlined,
+                                  Icons.email_rounded,
                                   color: Colors.black,
                                   size: 30,
                                 ),
@@ -157,7 +168,75 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                     ),
                                     Text(
-                                      email!,
+                                      user.email!,
+                                      style: TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.grey[400],
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  FontAwesomeIcons.userGroup,
+                                  color: Colors.black,
+                                  size: 30,
+                                ),
+                                const SizedBox(
+                                  width: 20.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "Status",
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Not Set",
+                                      style: TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.grey[400],
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  FontAwesomeIcons.userTag,
+                                  color: Colors.black,
+                                  size: 30,
+                                ),
+                                const SizedBox(
+                                  width: 20.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "Bio",
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Not Set",
                                       style: TextStyle(
                                         fontSize: 12.0,
                                         color: Colors.grey[400],

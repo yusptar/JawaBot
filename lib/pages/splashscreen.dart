@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:chat_bot/pages/login_pages.dart';
 import 'package:flutter/material.dart';
 
+import 'auth_page.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -14,12 +16,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds: 4),
+      const Duration(seconds: 3),
       () => Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) {
-            return const LoginPage();
+            return AuthPage();
           },
         ),
       ),

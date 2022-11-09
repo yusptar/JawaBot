@@ -1,20 +1,25 @@
-import 'package:chat_bot/pages/login_pages.dart';
-import 'package:chat_bot/widgets/alert/alert_register.dart';
-import 'package:chat_bot/widgets/alert/alert_register_failure.dart';
-import 'package:flutter/material.dart';
+import 'package:chat_bot/main.dart';
 import 'package:chat_bot/services/sign_in_service.dart';
+import 'package:chat_bot/widgets/alert/alert_login.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:chat_bot/widgets/alert/alert_register_failure.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisPage extends StatefulWidget {
-  const RegisPage({Key? key}) : super(key: key);
+  final Function() onClickedSignIn;
+  const RegisPage({Key? key, required this.onClickedSignIn}) : super(key: key);
 
   @override
   State<RegisPage> createState() => _RegisPage();
 }
 
 class _RegisPage extends State<RegisPage> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool passwordHidden = true;
   bool isChecked = false;
@@ -25,10 +30,32 @@ class _RegisPage extends State<RegisPage> {
     });
   }
 
+  Future signUp() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      return e;
+    }
+
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
+        key: formKey,
         child: Center(
           child: ListView(
             padding: const EdgeInsets.only(
@@ -64,6 +91,11 @@ class _RegisPage extends State<RegisPage> {
                   keyboardType: TextInputType.text,
                   controller: emailController,
                   autofocus: false,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (email) =>
+                      email != null && !EmailValidator.validate(email)
+                          ? 'Enter a valid email'
+                          : null,
                   decoration: InputDecoration(
                     hintText: 'E-mail',
                     contentPadding:
@@ -80,6 +112,11 @@ class _RegisPage extends State<RegisPage> {
                   controller: passwordController,
                   autofocus: false,
                   obscureText: passwordHidden,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (password) =>
+                      password != null && password.length < 6
+                          ? 'Enter min. 6 characters'
+                          : null,
                   decoration: InputDecoration(
                     hintText: 'Password',
                     suffixIcon: TextButton(
@@ -104,21 +141,25 @@ class _RegisPage extends State<RegisPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.all(5),
-                child: Row(
-                  children: [
-                    Checkbox(
-                      value: isChecked,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
-                      },
-                    ),
-                    const Text(
-                      'I would like to receive your information',
-                    ),
-                  ],
+                margin: const EdgeInsets.all(20),
+                alignment: Alignment.center,
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Sudah mempunyai akun? ',
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                    children: [
+                      TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = widget.onClickedSignIn,
+                        text: 'Log In',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
@@ -139,25 +180,9 @@ class _RegisPage extends State<RegisPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () {
-                    if (nameController.text.isNotEmpty &&
-                        emailController.text.isNotEmpty &&
+                    if (emailController.text.isNotEmpty &&
                         passwordController.text.isNotEmpty) {
-                      signUpWithEmail(
-                              emailController.text, passwordController.text)
-                          .then(
-                        (result) {
-                          if (result != null) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const LoginPage();
-                                },
-                              ),
-                            );
-                            AlertRegister(context);
-                          }
-                        },
-                      );
+                      signUp();
                     } else {
                       AlertRegisterFailure(context);
                     }
