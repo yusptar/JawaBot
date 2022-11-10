@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: const CircleAvatar(
               backgroundImage: AssetImage("assets/images/default.png"),
             ),
-          )
+          ),
         ],
       ),
       drawer: Theme(

@@ -1,11 +1,11 @@
 import 'package:chat_bot/main.dart';
-import 'package:chat_bot/services/sign_in_service.dart';
-import 'package:chat_bot/widgets/alert/alert_login.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:chat_bot/widgets/alert/alert_register_failure.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chat_bot/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisPage extends StatefulWidget {
   final Function() onClickedSignIn;
@@ -24,22 +24,34 @@ class _RegisPage extends State<RegisPage> {
   bool passwordHidden = true;
   bool isChecked = false;
 
+  // Show & Hide Password Method
   void _showPassword() {
     setState(() {
       passwordHidden = !passwordHidden;
     });
   }
 
-  Future signUp() async {
+  // Store to Firebase Method
+  Future signUp(Users user) async {
+    // Form Validation
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
 
+    // Loading Dialog
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => const Center(child: CircularProgressIndicator()),
     );
     try {
+      // Store user to Firebase Firestore
+      final docUser = FirebaseFirestore.instance.collection('users').doc();
+      user.id = docUser.id;
+
+      final json = user.toJson();
+      await docUser.set(json);
+
+      // Store to Firebase Authentication
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
@@ -75,6 +87,7 @@ class _RegisPage extends State<RegisPage> {
                   keyboardType: TextInputType.text,
                   controller: nameController,
                   autofocus: false,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     hintText: 'Name',
                     contentPadding:
@@ -91,10 +104,11 @@ class _RegisPage extends State<RegisPage> {
                   keyboardType: TextInputType.text,
                   controller: emailController,
                   autofocus: false,
+                  textInputAction: TextInputAction.next,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (email) =>
                       email != null && !EmailValidator.validate(email)
-                          ? 'Enter a valid email'
+                          ? 'Masukkan email dengan benar'
                           : null,
                   decoration: InputDecoration(
                     hintText: 'E-mail',
@@ -112,10 +126,11 @@ class _RegisPage extends State<RegisPage> {
                   controller: passwordController,
                   autofocus: false,
                   obscureText: passwordHidden,
+                  textInputAction: TextInputAction.next,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (password) =>
                       password != null && password.length < 6
-                          ? 'Enter min. 6 characters'
+                          ? 'Masukkan password minimal 6 karakter'
                           : null,
                   decoration: InputDecoration(
                     hintText: 'Password',
@@ -182,7 +197,12 @@ class _RegisPage extends State<RegisPage> {
                   onTap: () {
                     if (emailController.text.isNotEmpty &&
                         passwordController.text.isNotEmpty) {
-                      signUp();
+                      final user = Users(
+                        name: nameController.text,
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                      signUp(user);
                     } else {
                       AlertRegisterFailure(context);
                     }

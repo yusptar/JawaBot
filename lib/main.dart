@@ -1,5 +1,6 @@
 import 'package:chat_bot/pages/dashboard_page.dart';
-import 'package:chat_bot/pages/home_page.dart';
+import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chat_bot/pages/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,6 +35,24 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return const DashboardPage();
+            /* return StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(snapshot.data!.uid)
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<DocumentSnapshot> userSnapshot) {
+                if (userSnapshot.hasData && userSnapshot.data!.data() != null) {
+                  return const DashboardPage();
+                } else {
+                  return const Material(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              },
+            );*/
           } else {
             return const SplashScreen();
           }

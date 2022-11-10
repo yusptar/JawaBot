@@ -40,6 +40,7 @@ dependencies:
   intl: ^0.17.0
   firebase_core: ^1.24.0
   firebase_auth: ^3.3.5
+  cloud_firestore: ^3.4.7
   provider: ^6.0.4
   sqflite: ^2.0.3+1
   path_provider: ^2.0.11

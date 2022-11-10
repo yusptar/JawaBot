@@ -1,12 +1,12 @@
 import 'package:chat_bot/main.dart';
 import 'package:chat_bot/pages/dashboard_page.dart';
-import 'package:chat_bot/widgets/alert/alert_login.dart';
 import 'package:chat_bot/widgets/alert/alert_login_failure.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../models/user.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback onClickedSignUp;
@@ -33,22 +33,31 @@ class _LoginPage extends State<LoginPage> {
   }
 
   Future signIn() async {
+    // Form Validation
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
 
+    // Loading Dialog
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => const Center(child: CircularProgressIndicator()),
     );
+
+    // Firebase Authentication Method
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
     } on FirebaseAuthException catch (e) {
-      return e;
+      return const SnackBar(
+        content: Text(
+          'Cek kembali email dan password anda',
+        ),
+      );
     }
+
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
@@ -75,10 +84,11 @@ class _LoginPage extends State<LoginPage> {
                 keyboardType: TextInputType.text,
                 controller: emailController,
                 autofocus: false,
+                textInputAction: TextInputAction.next,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (email) =>
                     email != null && !EmailValidator.validate(email)
-                        ? 'Enter a valid email'
+                        ? 'Masukkan email dengan benar'
                         : null,
                 decoration: InputDecoration(
                   hintText: 'E-mail',
@@ -96,9 +106,10 @@ class _LoginPage extends State<LoginPage> {
                 controller: passwordController,
                 autofocus: false,
                 obscureText: passwordHidden,
+                textInputAction: TextInputAction.next,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (password) => password != null && password.length < 6
-                    ? 'Enter min. 6 characters'
+                    ? 'Masukkan password minimal 6 karakter'
                     : null,
                 decoration: InputDecoration(
                   hintText: 'Password',
@@ -175,7 +186,7 @@ class _LoginPage extends State<LoginPage> {
             const SizedBox(
               height: 60,
             ),
-            Row(
+            /*Row(
               children: [
                 const Expanded(
                   child: Divider(
@@ -203,22 +214,18 @@ class _LoginPage extends State<LoginPage> {
             IconButton(
               onPressed: () {
                 signInWithGoogle().then(
-                  (result) {
-                    if (result != null) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const DashboardPage();
-                          },
-                        ),
-                      );
-                      AlertLoginSucces(context);
-                    }
+                  (value) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DashboardPage(),
+                      ),
+                    );
                   },
                 );
               },
               icon: Image.asset('assets/logo/google_logo.png'),
-            ),
+            ),*/
           ],
         ),
       ),
