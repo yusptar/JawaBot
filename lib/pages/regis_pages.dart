@@ -201,6 +201,8 @@ class _RegisPage extends State<RegisPage> {
                         name: nameController.text,
                         email: emailController.text,
                         password: passwordController.text,
+                        status: 'Not Set',
+                        bio: 'Not Set',
                       );
                       signUp(user);
                     } else {

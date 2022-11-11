@@ -1,57 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../widgets/alert/alert_update_profile.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  const EditProfilePage({
+    super.key,
+    this.name,
+    this.email,
+    this.status,
+    this.bio,
+  });
+  final String? name;
+  final String? email;
+  final String? status;
+  final String? bio;
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final user = FirebaseAuth.instance.currentUser!;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
+  TextEditingController bioController = TextEditingController();
 
-  String? photoURL;
-  String? displayName;
+  String? name;
   String? email;
-
-  final TextEditingController _statusController = TextEditingController();
-  final TextEditingController _bioController = TextEditingController();
-
-  Future<void> _addStatus() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      prefs.setString('status', _statusController.text);
-    });
-  }
-
-  Future<void> _loadStatus() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _statusController.text = (prefs.getString('status') ?? '');
-    });
-  }
-
-  Future<void> _addBio() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      prefs.setString('bio', _bioController.text);
-    });
-  }
-
-  Future<void> _loadBio() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _bioController.text = (prefs.getString('bio') ?? '');
-    });
-  }
+  String? status;
+  String? bio;
 
   @override
   void initState() {
-    _loadStatus();
-    _loadBio();
     super.initState();
+
+    name = widget.name;
+    email = widget.email;
+    status = widget.status;
+    bio = widget.bio;
+
+    nameController = TextEditingController(text: widget.name);
+    emailController = TextEditingController(text: widget.email);
+    statusController = TextEditingController(text: widget.status);
+    bioController = TextEditingController(text: widget.bio);
   }
 
   @override
@@ -76,9 +67,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 margin: const EdgeInsets.only(
                     top: 50, bottom: 10, right: 15, left: 15),
                 child: TextFormField(
-                  readOnly: true,
+                  controller: nameController,
+                  onChanged: (String n) {
+                    setState(() {
+                      name = n;
+                    });
+                  },
                   decoration: InputDecoration(
-                    hintText: 'Not Set',
+                    labelText: 'Name',
                     contentPadding:
                         const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     border: OutlineInputBorder(
@@ -91,9 +87,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 margin: const EdgeInsets.only(
                     top: 5, bottom: 10, right: 15, left: 15),
                 child: TextFormField(
+                  controller: emailController,
                   readOnly: true,
+                  onChanged: (String e) {
+                    setState(() {
+                      email = e;
+                    });
+                  },
                   decoration: InputDecoration(
-                    hintText: user.email!,
+                    labelText: 'Email',
                     contentPadding:
                         const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     border: OutlineInputBorder(
@@ -107,11 +109,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     top: 5, bottom: 10, right: 15, left: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.text,
-                  controller: _statusController,
+                  controller: statusController,
                   autofocus: false,
+                  onChanged: (String s) {
+                    setState(() {
+                      status = s;
+                    });
+                  },
                   decoration: InputDecoration(
                     labelText: 'Status',
-                    hintText: 'student, lecturer, etc..',
                     contentPadding:
                         const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     border: OutlineInputBorder(
@@ -124,12 +130,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 margin: const EdgeInsets.only(
                     bottom: 5, top: 5, right: 15, left: 15),
                 child: TextFormField(
-                  controller: _bioController,
+                  controller: bioController,
                   autofocus: false,
                   maxLines: 3,
+                  onChanged: (String b) {
+                    setState(() {
+                      bio = b;
+                    });
+                  },
                   decoration: InputDecoration(
                     labelText: 'Bio',
-                    hintText: 'hi im student, ..',
                     contentPadding:
                         const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     border: OutlineInputBorder(
@@ -156,12 +166,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () {
-                    _addStatus();
-                    _addBio();
-                    /*const snackBar = SnackBar(
-                      content: Text('Berhasil update.'),
+                    final docUser = FirebaseFirestore.instance
+                        .collection('users')
+                        .doc('QqgJnMkZmtuwQdLvPxV9');
+
+                    docUser.update(
+                      {
+                        'name': nameController.text,
+                        'status': statusController.text,
+                        'bio': bioController.text,
+                      },
                     );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);*/
+                    AlertUpdateProfile(context);
                   },
                 ),
               ),

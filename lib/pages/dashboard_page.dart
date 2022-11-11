@@ -3,7 +3,6 @@ import 'package:chat_bot/pages/home_page.dart';
 import 'package:chat_bot/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../models/user.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);

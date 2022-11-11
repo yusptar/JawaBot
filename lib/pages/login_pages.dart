@@ -1,12 +1,9 @@
 import 'package:chat_bot/main.dart';
-import 'package:chat_bot/pages/dashboard_page.dart';
 import 'package:chat_bot/widgets/alert/alert_login_failure.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_bot/services/sign_in_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/user.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback onClickedSignUp;
