@@ -32,7 +32,8 @@ class _RegisPage extends State<RegisPage> {
   }
 
   // Store to Firebase Method
-  Future signUp(Users user) async {
+  Future signUp(Users u) async {
+    final firebaseUser = FirebaseAuth.instance.currentUser!;
     // Form Validation
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
@@ -46,9 +47,9 @@ class _RegisPage extends State<RegisPage> {
     try {
       // Store user to Firebase Firestore
       final docUser = FirebaseFirestore.instance.collection('users').doc();
-      user.id = docUser.id;
+      u.id = docUser.id;
 
-      final json = user.toJson();
+      final json = u.toJson();
       await docUser.set(json);
 
       // Store to Firebase Authentication
@@ -197,14 +198,14 @@ class _RegisPage extends State<RegisPage> {
                   onTap: () {
                     if (emailController.text.isNotEmpty &&
                         passwordController.text.isNotEmpty) {
-                      final user = Users(
+                      final u = Users(
                         name: nameController.text,
                         email: emailController.text,
                         password: passwordController.text,
-                        status: 'Not Set',
-                        bio: 'Not Set',
+                        status: '',
+                        bio: '',
                       );
-                      signUp(user);
+                      signUp(u);
                     } else {
                       AlertRegisterFailure(context);
                     }

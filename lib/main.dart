@@ -1,8 +1,12 @@
+import 'package:chat_bot/pages/auth_page.dart';
 import 'package:chat_bot/pages/dashboard_page.dart';
+
 import 'package:chat_bot/pages/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'models/utils.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: Utils.messengerKey,
       navigatorKey: navigatorKey,
       title: 'JawaBot',
       theme: ThemeData(

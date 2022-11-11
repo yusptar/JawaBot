@@ -45,6 +45,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
     bioController = TextEditingController(text: widget.bio);
   }
 
+  void updateUser() {
+    final docUser = FirebaseFirestore.instance
+        .collection('users')
+        .doc('joO85FtgqNPJrH8DWXQB');
+
+    docUser.update({
+      'name': nameController.text,
+      'status': statusController.text,
+      'bio': bioController.text,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,17 +178,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () {
-                    final docUser = FirebaseFirestore.instance
-                        .collection('users')
-                        .doc('QqgJnMkZmtuwQdLvPxV9');
-
-                    docUser.update(
-                      {
-                        'name': nameController.text,
-                        'status': statusController.text,
-                        'bio': bioController.text,
-                      },
-                    );
+                    updateUser();
                     AlertUpdateProfile(context);
                   },
                 ),

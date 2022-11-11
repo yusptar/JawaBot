@@ -5,6 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/utils.dart';
+
 class LoginPage extends StatefulWidget {
   final VoidCallback onClickedSignUp;
 
@@ -47,15 +49,10 @@ class _LoginPage extends State<LoginPage> {
         email: emailController.text,
         password: passwordController.text,
       );
+      navigatorKey.currentState!.popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
-      return const SnackBar(
-        content: Text(
-          'Cek kembali email dan password anda',
-        ),
-      );
+      Utils.showSnackBar(e.message);
     }
-
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   @override

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:chat_bot/pages/login_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'auth_page.dart';
@@ -16,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () => Navigator.push(
         context,
         MaterialPageRoute(
@@ -72,7 +71,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    CircularProgressIndicator(),
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),

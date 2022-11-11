@@ -14,9 +14,10 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Future<Users?> getUser() async {
+    final firebaseUser = FirebaseAuth.instance.currentUser!;
     final docUser = FirebaseFirestore.instance
         .collection('users')
-        .doc('QqgJnMkZmtuwQdLvPxV9');
+        .doc('joO85FtgqNPJrH8DWXQB');
     final snapshot = await docUser.get();
 
     if (snapshot.exists) {
@@ -30,9 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: FutureBuilder<Users?>(
         future: getUser(),
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Text('Something went wrong!');
-          } else if (snapshot.hasData) {
+          if (snapshot.hasData) {
             final user = snapshot.data;
             return user == null
                 ? const Center(

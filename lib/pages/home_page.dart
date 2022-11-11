@@ -3,7 +3,7 @@ import 'package:chat_bot/widgets/background/paralax_bg.dart';
 import 'package:chat_bot/widgets/alert/alert_logout.dart';
 import 'package:chat_bot/pages/help_center_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/user.dart';
+import '../models/content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,14 +16,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final user = FirebaseAuth.instance.currentUser!;
 
-  Future<Users?> getContent() async {
-    final docUser = FirebaseFirestore.instance
-        .collection('users')
-        .doc('QqgJnMkZmtuwQdLvPxV9');
-    final snapshot = await docUser.get();
+  Future<Content?> getContent() async {
+    final content = FirebaseFirestore.instance
+        .collection('content')
+        .doc('jo1hgEEHsV4vsKEXZ9bZ');
+    final snapshot = await content.get();
 
     if (snapshot.exists) {
-      return Users.fromJson(snapshot.data()!);
+      return Content.fromJson(snapshot.data()!);
     }
   }
 
@@ -144,18 +144,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: FutureBuilder<Users?>(
+      body: FutureBuilder<Content?>(
         future: getContent(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Text('Something went wrong!');
           } else if (snapshot.hasData) {
-            final user = snapshot.data;
-            return user == null
+            final content = snapshot.data;
+            return content == null
                 ? const Center(
                     child: Text('No Content'),
                   )
-                : homePage(user);
+                : homePage(content);
           } else {
             return const Center(
               child: CircularProgressIndicator(),
@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget homePage(Users u) {
+  Widget homePage(Content c) {
     return NotificationListener(
       onNotification: (notif) {
         if (notif is ScrollUpdateNotification) {
@@ -300,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         margin: const EdgeInsets.only(bottom: 5),
                         child: Text(
-                          "History of Java Island",
+                          c.title!,
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall
@@ -311,8 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         margin:
                             const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: Text(
-                          "Jawa adalah sebuah pulau di Indonesia yang terletak di kepulauan Sunda Besar dan merupakan pulau terluas ke-13 di dunia. Jumlah penduduk di Pulau Jawa sekitar 150 juta. "
-                          "Jawa adalah pulau yang relatif muda dan sebagian besar terbentuk dari aktivitas vulkanik. Deretan gunung-gunung berapi membentuk jajaran yang terbentang dari timur hingga barat pulau ini, dengan dataran endapan aluvial sungai di bagian utara. Pulau Jawa dipisahkan oleh selat dengan beberapa pulau utama, yakni Pulau Sumatra di barat laut, Pulau Kalimantan di utara, Pulau Madura di timur laut, dan Pulau Bali di sebelah timur. Sementara itu di sebelah selatan pulau Jawa terbentang Samudra Hindia.",
+                          c.description!,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1
@@ -324,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: InkWell(
                           child: Text(
-                            "Sumber : id.wikipedia.org/wiki/jawa",
+                            "Source : id.wikipedia.org/wiki/jawa",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1
