@@ -1,6 +1,4 @@
-import 'package:chat_bot/pages/auth_page.dart';
 import 'package:chat_bot/pages/dashboard_page.dart';
-
 import 'package:chat_bot/pages/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';

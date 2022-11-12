@@ -21,6 +21,8 @@ class _RegisPage extends State<RegisPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  String uid = '';
+
   bool passwordHidden = true;
   bool isChecked = false;
 
@@ -33,9 +35,11 @@ class _RegisPage extends State<RegisPage> {
 
   // Store to Firebase Method
   Future signUp(Users u) async {
-    final firebaseUser = FirebaseAuth.instance.currentUser!;
     // Form Validation
     final isValid = formKey.currentState!.validate();
+    print('---------');
+    print(isValid);
+    print('---------');
     if (!isValid) return;
 
     // Loading Dialog
@@ -45,18 +49,20 @@ class _RegisPage extends State<RegisPage> {
       builder: (context) => const Center(child: CircularProgressIndicator()),
     );
     try {
-      // Store user to Firebase Firestore
-      final docUser = FirebaseFirestore.instance.collection('users').doc();
-      u.id = docUser.id;
-
-      final json = u.toJson();
-      await docUser.set(json);
-
       // Store to Firebase Authentication
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential result =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
+
+      // Store user to Firebase Firestore
+      final docUser =
+          FirebaseFirestore.instance.collection('users').doc(result.user!.uid);
+      u.id = result.user!.uid;
+
+      final json = u.toJson();
+      await docUser.set(json);
     } on FirebaseAuthException catch (e) {
       return e;
     }

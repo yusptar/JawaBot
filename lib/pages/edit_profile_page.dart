@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/alert/alert_update_profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({
@@ -46,9 +47,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   void updateUser() {
-    final docUser = FirebaseFirestore.instance
-        .collection('users')
-        .doc('joO85FtgqNPJrH8DWXQB');
+    var firebaseUser = FirebaseAuth.instance.currentUser!;
+    final docUser =
+        FirebaseFirestore.instance.collection('users').doc(firebaseUser.uid);
 
     docUser.update({
       'name': nameController.text,

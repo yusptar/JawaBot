@@ -14,10 +14,9 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Future<Users?> getUser() async {
-    final firebaseUser = FirebaseAuth.instance.currentUser!;
-    final docUser = FirebaseFirestore.instance
-        .collection('users')
-        .doc('joO85FtgqNPJrH8DWXQB');
+    var firebaseUser = await FirebaseAuth.instance.currentUser!;
+    final docUser =
+        FirebaseFirestore.instance.collection('users').doc(firebaseUser.uid);
     final snapshot = await docUser.get();
 
     if (snapshot.exists) {
