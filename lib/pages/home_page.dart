@@ -276,6 +276,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               ?.copyWith(color: Colors.white),
                         ),
                       ),
+                      Container(
+                        margin:
+                            const EdgeInsets.only(top: 20, right: 20, left: 20),
+                        child: Text(
+                          "Developed by Moch Yusuf Hermawan.",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              ?.copyWith(color: Colors.white),
+                        ),
+                      ),
                     ],
                   ),
                 ),

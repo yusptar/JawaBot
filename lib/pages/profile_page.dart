@@ -150,14 +150,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                   const Text(
                                     "Name",
                                     style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 15.0,
                                     ),
                                   ),
                                   Text(
                                     u.name!,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12.0,
-                                      color: Colors.grey[400],
+                                      color: Colors.black,
                                     ),
                                   )
                                 ],
@@ -184,14 +185,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                   const Text(
                                     "E-mail",
                                     style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 15.0,
                                     ),
                                   ),
                                   Text(
                                     u.email!,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12.0,
-                                      color: Colors.grey[400],
+                                      color: Colors.black,
                                     ),
                                   )
                                 ],
@@ -218,14 +220,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                   const Text(
                                     "Status",
                                     style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 15.0,
                                     ),
                                   ),
                                   Text(
                                     u.status!,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12.0,
-                                      color: Colors.grey[400],
+                                      color: Colors.black,
                                     ),
                                   )
                                 ],
@@ -253,13 +256,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                     "Bio",
                                     style: TextStyle(
                                       fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
                                     u.bio!,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12.0,
-                                      color: Colors.grey[400],
+                                      color: Colors.black,
                                     ),
                                   )
                                 ],

@@ -37,9 +37,6 @@ class _RegisPage extends State<RegisPage> {
   Future signUp(Users u) async {
     // Form Validation
     final isValid = formKey.currentState!.validate();
-    print('---------');
-    print(isValid);
-    print('---------');
     if (!isValid) return;
 
     // Loading Dialog
